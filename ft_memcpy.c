@@ -18,11 +18,11 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	char	*d;
     size_t  i;
 
-    if (dest == 0 && src == 0)
-        return (0);
+	if (dest == 0 && src == 0)
+		return (0);
 	s = (char *)src;
 	d = (char *)dest;
-    i = 0;
+	i = 0;
     while (i < n)
      {
         d[i] = s[i];
