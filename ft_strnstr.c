@@ -1,19 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smeixoei <smeixoei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/12 14:22:58 by smeixoei          #+#    #+#             */
-/*   Updated: 2023/06/12 14:39:22 by smeixoei         ###   ########.fr       */
+/*   Created: 2023/06/15 19:20:00 by smeixoei          #+#    #+#             */
+/*   Updated: 2023/06/15 19:45:55 by smeixoei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	new->next = *lst;
-	*lst = new;
+	size_t	i;
+	size_t	result;
+
+	i = 0;
+	if (haystack == NULL && len == 0)
+		return (NULL);
+	if (needle[0] == '\0')
+		return ((char *)haystack);
+	while ((haystack[i] != '\0') && (i + ft_strlen(needle) <= len))
+	{
+		result = ft_strncmp(&haystack[i], needle, ft_strlen(needle));
+		if (result == 0)
+			return ((char *)&haystack[i]);
+		i++;
+	}
+	return (0);
 }

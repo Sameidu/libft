@@ -1,18 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: smeixoei <smeixoei@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/12 14:23:02 by smeixoei          #+#    #+#             */
+/*   Updated: 2023/06/12 14:43:33 by smeixoei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-void ft_lstclear(t_list **lst, void (*del)(void*))
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-    t_list *current; // Se obtiene el puntero al primer nodo de la lista
-	t_list *next;
+	t_list	*current;
+	t_list	*next;
 
-    current = *lst;
-	while (current != NULL) // Se recorre la lista hasta llegar al final
+	current = *lst;
+	while (current != NULL)
 	{
-		next = current->next; // Se guarda el puntero al siguiente nodo
-		if (del != NULL) // Se verifica si se ha proporcionado una función para eliminar el contenido del nodo
-			del(current->content); // Se llama a la función para eliminar el contenido del nodo
-		free(current); // Se libera la memoria ocupada por el nodo
-		current = next; // Se avanza al siguiente nodo
+		next = current->next;
+		if (del != NULL)
+			del(current->content);
+		free(current);
+		current = next;
 	}
-	*lst = NULL; // Se establece el puntero a la lista como nulo
+	*lst = NULL;
 }

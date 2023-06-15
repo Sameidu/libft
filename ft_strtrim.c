@@ -6,7 +6,7 @@
 /*   By: smeixoei <smeixoei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 12:09:43 by smeixoei          #+#    #+#             */
-/*   Updated: 2023/04/11 12:09:43 by smeixoei         ###   ########.fr       */
+/*   Updated: 2023/06/15 18:03:25 by smeixoei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ char	*ft_strtrim(char const *s1, char const *set)
 	int	i;
 	int	j;
 
-	if (!s1)
+	if (!s1 || !set)
 		return (0);
 	len = ft_strlen(s1);
 	i = 0;
-	j = len - 1;
+	j = len;
 	while (i <= len / 2 && ft_strchr(set, s1[i]) != NULL)
 		i++;
 	while (j >= len / 2 && ft_strchr(set, s1[j]) != NULL)
 		j--;
-	if (i > j)
+	if (i >= j)
 		return (ft_strdup(""));
 	len = j - i;
 	return (ft_substr(s1, i, len + 1));

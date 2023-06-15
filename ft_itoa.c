@@ -1,10 +1,25 @@
-#include "libft.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: smeixoei <smeixoei@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/12 14:22:41 by smeixoei          #+#    #+#             */
+/*   Updated: 2023/06/15 19:16:55 by smeixoei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int ft_digit(int i)
+#include "libft.h"
+#include <stdio.h>
+
+int	ft_digit(int i)
 {
 	int	count;
 
 	count = 0;
+	if (i == 0)
+		return (1);
 	if (i < 0)
 	{
 		i *= -1;
@@ -18,28 +33,29 @@ int ft_digit(int i)
 	return (count);
 }
 
-char		*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
-	char    *str;
+	char	*str;
 	int		i;
-	int     nb;
 
-	nb = n;
-	i = ft_digit(nb);
-	if (!(str = malloc(i * sizeof(char) + 1)))
+	i = ft_digit(n);
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	str = ft_calloc(i + 1, sizeof(char));
+	if (!str)
 		return (0);
-	str[i--] = 0;
-	if (nb == 0)
+	if (n == 0)
 		str[0] = 48;
-	if (nb < 0)
+	if (n < 0)
 	{
 		str[0] = '-';
-		nb = nb * -1;
+		n = n * -1;
 	}
-	while (nb > 0)
+	i--;
+	while (n > 0)
 	{
-		str[i--] = nb % 10 + '0';
-		nb = nb / 10;
+		str[i--] = n % 10 + '0';
+		n = n / 10;
 	}
 	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: smeixoei <smeixoei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 12:09:35 by smeixoei          #+#    #+#             */
-/*   Updated: 2023/04/11 12:11:41 by smeixoei         ###   ########.fr       */
+/*   Updated: 2023/06/15 19:15:14 by smeixoei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,9 @@ int	ft_count_words(const char *s, char c)
 	count = 0;
 	while (s[i] != '\0')
 	{
-		if (s[i] != c)
-		{
+		if (((s[i] != c) && (s[i + 1] == c)) || s[i + 1] == '\0')
 			count++;
-			while (s[i] != c && s[i] != '\0')
-				i++;
-		}
-		else
-			i++;
+		i++;
 	}
 	return (count);
 }
@@ -49,7 +44,7 @@ char	**ft_fill_array(char **aux, char const *s, char c)
 		while (s[i] != c && s[i] != '\0')
 			i++;
 		if (s[j] == '\0')
-			aux[k++] = "\0";
+			return (aux);
 		else
 			aux[k++] = ft_substr(s, j, i - j);
 	}
@@ -64,7 +59,7 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	nwords = ft_count_words(s, c);
-	aux = ft_calloc((nwords + 1) * sizeof(char *));
+	aux = ft_calloc((nwords + 1), sizeof(char *));
 	if (!aux)
 		return (NULL);
 	aux = ft_fill_array(aux, s, c);
