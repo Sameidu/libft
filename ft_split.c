@@ -28,7 +28,19 @@ int	ft_count_words(const char *s, char c)
 	return (count);
 }
 
-//void	*ft_free_array(**aux)
+void	*ft_free_array(char **aux)
+{
+	int	i;
+
+	i = 0;
+	while (aux[i] != '\0')
+	{
+		free(aux[i]);
+		i++;
+	}
+	free(aux);
+	return (NULL);
+}
 
 char	**ft_fill_array(char **aux, char const *s, char c)
 {
@@ -50,8 +62,8 @@ char	**ft_fill_array(char **aux, char const *s, char c)
 		else
 		{
 			aux[k++] = ft_substr(s, j, i - j);
-			//if (!aux[k])
-				//return (ft_free_array(aux));
+			if (!aux[k])
+				return (ft_free_array(aux));
 		}
 	}
 	return (aux);
