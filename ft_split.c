@@ -6,7 +6,7 @@
 /*   By: smeixoei <smeixoei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 12:09:35 by smeixoei          #+#    #+#             */
-/*   Updated: 2023/06/15 19:15:14 by smeixoei         ###   ########.fr       */
+/*   Updated: 2023/06/19 16:27:19 by smeixoei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,11 @@ char	**ft_fill_array(char **aux, char const *s, char c)
 		if (s[j] == '\0')
 			return (aux);
 		else
+		{
 			aux[k++] = ft_substr(s, j, i - j);
+			if (!aux[k])
+				ft_free_array();
+		}
 	}
 	return (aux);
 }
