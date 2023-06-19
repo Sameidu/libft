@@ -18,8 +18,10 @@ all: $(NAME)
 $(NAME): $(OBJS) $(INCLUDES)
 		$(LIB) $(NAME) $(OBJS)
 
-bonus: $(OBJS_BONUS)
-	$(LIB) $(NAME) $(OBJS_BONUS)
+bonus: $(NAME_BONUS)
+
+$(NAME_BONUS): $(SRCS_BONUS)
+	$(LIB) $(OBJS_BONUS)
 
 clean:
 	$(RM) $(OBJS) $(OBJS_BONUS)

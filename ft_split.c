@@ -6,7 +6,7 @@
 /*   By: smeixoei <smeixoei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 12:09:35 by smeixoei          #+#    #+#             */
-/*   Updated: 2023/06/19 16:27:19 by smeixoei         ###   ########.fr       */
+/*   Updated: 2023/06/19 16:38:18 by smeixoei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	ft_count_words(const char *s, char c)
 	return (count);
 }
 
+//void	*ft_free_array(**aux)
+
 char	**ft_fill_array(char **aux, char const *s, char c)
 {
 	size_t	i;
@@ -48,8 +50,8 @@ char	**ft_fill_array(char **aux, char const *s, char c)
 		else
 		{
 			aux[k++] = ft_substr(s, j, i - j);
-			if (!aux[k])
-				ft_free_array();
+			//if (!aux[k])
+				//return (ft_free_array(aux));
 		}
 	}
 	return (aux);

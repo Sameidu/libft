@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smeixoei <smeixoei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:24:11 by smeixoei          #+#    #+#             */
-/*   Updated: 2023/06/12 14:51:41 by smeixoei         ###   ########.fr       */
+/*   Updated: 2023/06/19 16:39:59 by smeixoei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,3 @@ t_list	*ft_lstnew(void *content)
 	list->next = NULL;
 	return (list);
 }
-/*
-int main(void)
-{
-    t_list *paco;
-    int i = 1;
-
-    paco = ft_lstnew(&i);
-    printf("%i", *(int *)paco->content);
-    return(0);
-}*/
