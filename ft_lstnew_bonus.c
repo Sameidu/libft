@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smeixoei <smeixoei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/08 16:50:20 by smeixoei          #+#    #+#             */
-/*   Updated: 2023/06/19 14:35:08 by smeixoei         ###   ########.fr       */
+/*   Created: 2023/06/12 14:24:11 by smeixoei          #+#    #+#             */
+/*   Updated: 2023/06/12 14:51:41 by smeixoei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_bzero(void *s, size_t n)
+t_list	*ft_lstnew(void *content)
 {
-	char	*str;
-	int		i;
+	t_list	*list;
 
-	str = s;
-	i = 0;
-	while (n > 0 && str[i] != '\0')
-	{
-		str[i] = 0;
-		i++;
-		n--;
-	}
+	list = malloc(sizeof(t_list));
+	if (!list)
+		return (NULL);
+	list->content = content;
+	list->next = NULL;
+	return (list);
 }
+/*
+int main(void)
+{
+    t_list *paco;
+    int i = 1;
+
+    paco = ft_lstnew(&i);
+    printf("%i", *(int *)paco->content);
+    return(0);
+}*/
