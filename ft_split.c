@@ -33,7 +33,7 @@ void	*ft_free_array(char **aux)
 	int	i;
 
 	i = 0;
-	while (aux[i] != '\0')
+	while (aux[i] != (void *)0)
 	{
 		free(aux[i]);
 		i++;
@@ -62,7 +62,7 @@ char	**ft_fill_array(char **aux, char const *s, char c)
 		else
 		{
 			aux[k++] = ft_substr(s, j, i - j);
-			if (!aux[k])
+			if (!aux[k - 1])
 				return (ft_free_array(aux));
 		}
 	}
