@@ -6,7 +6,7 @@
 /*   By: smeixoei <smeixoei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 12:09:35 by smeixoei          #+#    #+#             */
-/*   Updated: 2023/06/19 16:38:18 by smeixoei         ###   ########.fr       */
+/*   Updated: 2023/06/20 17:01:05 by smeixoei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	*ft_free_array(char **aux)
 	int	i;
 
 	i = 0;
-	while (aux[i] != (void *)0)
+	while (aux[i] != 0)
 	{
 		free(aux[i]);
 		i++;

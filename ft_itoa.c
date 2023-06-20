@@ -6,28 +6,28 @@
 /*   By: smeixoei <smeixoei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:22:41 by smeixoei          #+#    #+#             */
-/*   Updated: 2023/06/15 19:16:55 by smeixoei         ###   ########.fr       */
+/*   Updated: 2023/06/20 17:18:37 by smeixoei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
 
-int	ft_digit(int i)
+int	ft_digit(int n)
 {
 	int	count;
 
 	count = 0;
-	if (i == 0)
+	if (n == 0)
 		return (1);
-	if (i < 0)
+	if (n < 0)
 	{
-		i *= -1;
+		n *= -1;
 		count++;
 	}
-	while (i > 0)
+	while (n > 0)
 	{
-		i /= 10;
+		n /= 10;
 		count++;
 	}
 	return (count);
@@ -36,12 +36,12 @@ int	ft_digit(int i)
 char	*ft_itoa(int n)
 {
 	char	*str;
-	int		i;
+	int		number;
 
-	i = ft_digit(n);
+	number = ft_digit(n);
 	if (n == -2147483648)
 		return (ft_strdup("-2147483648"));
-	str = ft_calloc(i + 1, sizeof(char));
+	str = ft_calloc(number + 1, sizeof(char));
 	if (!str)
 		return (0);
 	if (n == 0)
@@ -51,10 +51,10 @@ char	*ft_itoa(int n)
 		str[0] = '-';
 		n = n * -1;
 	}
-	i--;
+	number--;
 	while (n > 0)
 	{
-		str[i--] = n % 10 + '0';
+		str[number--] = n % 10 + '0';
 		n = n / 10;
 	}
 	return (str);
