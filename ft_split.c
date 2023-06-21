@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static int	count_words(char const *s, char c)
+static int	ft_words(char const *s, char c)
 {
 	int	i;
 	int	words;
@@ -41,21 +41,21 @@ static int	strchr_pos(char const *s, char c)
 	return (pos_c);
 }
 
-static void	*free_mallocs(char **main_string)
+static void	*ft_free(char **aux)
 {
 	int	i;
 
 	i = 0;
-	while (main_string[i] != (void *)0)
+	while (aux[i] != (void *)0)
 	{
-		free(main_string[i]);
+		free(aux[i]);
 		i++;
 	}
-	free(main_string);
+	free(aux);
 	return (NULL);
 }
 
-static char	**complete_array(char const *s, char c, char **main_string)
+static char	**ft_fillarray(char const *s, char c, char **aux)
 {
 	int	pos_c;
 	int	i;
@@ -70,9 +70,9 @@ static char	**complete_array(char const *s, char c, char **main_string)
 			pos_c = strchr_pos(s, c);
 			if (pos_c)
 			{	
-				main_string[i] = ft_substr(s, 0, pos_c);
-				if (!main_string[i])
-					return (free_mallocs(main_string));
+				aux[i] = ft_substr(s, 0, pos_c);
+				if (!aux[i])
+					return (ft_free(aux));
 				i++;
 				s += pos_c;
 			}
@@ -80,19 +80,19 @@ static char	**complete_array(char const *s, char c, char **main_string)
 				s++;
 		}
 	}
-	main_string[i] = NULL;
-	return (main_string);
+	aux[i] = NULL;
+	return (aux);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**main_string;
+	char	**aux;
 
 	if (s == NULL)
 		return (NULL);
-	main_string = (char **)malloc((count_words(s, c) + 1) * sizeof(char *));
-	if (!main_string)
+	aux = (char **)malloc((ft_words(s, c) + 1) * sizeof(char *));
+	if (!aux)
 		return (NULL);
-	main_string = complete_array(s, c, main_string);
-	return (main_string);
+	aux = ft_fillarray(s, c, aux);
+	return (aux);
 }
