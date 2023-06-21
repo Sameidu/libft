@@ -12,74 +12,98 @@
 
 #include "libft.h"
 
-int	ft_count_words(const char *s, char c)
+int	count_words(const char	*str, char c)
 {
-	int	count;
-	int	i;
+	size_t	countw;
+	size_t	i;
 
+	countw = 0;
 	i = 0;
-	count = 0;
-	while (s[i] != '\0')
+	while (str[i] != 0)
 	{
-		if (((s[i] != c) && (s[i + 1] == c)) || s[i + 1] == '\0')
-			count++;
-		i++;
+		if (str[i] != c && str[i] != 0)
+		{
+			countw++;
+			while (str[i] != c && str[i] != 0)
+				i++;
+		}
+		else if (str[i] != 0)
+			i++;
 	}
-	return (count);
+	return (countw);
 }
 
-void	*ft_free_array(char **aux)
+void	ft_strcpy(char *dst, const char *src, int start, int last)
 {
 	int	i;
 
 	i = 0;
-	while (aux[i] != 0)
+	while (start < last)
 	{
-		free(aux[i]);
+		dst[i] = src[start];
+		i++;
+		start++;
+	}
+	dst[i] = 0;
+}
+
+void	*freemmory(char **memry, size_t aux)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < aux)
+	{
+		free(memry[i]);
 		i++;
 	}
-	free(aux);
+	free(memry);
 	return (NULL);
 }
 
-char	**ft_fill_array(char **aux, char const *s, char c)
+void	save_words(const char *s, char c, char **str)
 {
 	size_t	i;
 	size_t	j;
-	int		k;
+	size_t	start;
 
 	i = 0;
-	k = 0;
-	while (s[i])
+	j = 0;
+	while (s[i] != 0)
 	{
-		while (s[i] == c && s[i] != '\0')
-			i++;
-		j = i;
-		while (s[i] != c && s[i] != '\0')
-			i++;
-		if (s[j] == '\0')
-			return (aux);
-		else
+		if (s[i] != c && s[i] != 0)
 		{
-			aux[k++] = ft_substr(s, j, i - j);
-			if (!aux[k - 1])
-				return (ft_free_array(aux));
+			start = i;
+			while (s[i] != c && s[i] != 0)
+				i++;
+			str[j] = (char *)malloc(sizeof(char) * (i - start + 1));
+			if (str[j] == 0)
+			{
+				freemmory(str, j);
+				return ;
+			}
+			ft_strcpy(str[j], s, start, i);
+			j++;
 		}
+		else if (s[i] != 0)
+			i++;
 	}
-	return (aux);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**aux;
-	int		nwords;
+	char	**str;
+	size_t	n;
 
-	if (!s)
-		return (NULL);
-	nwords = ft_count_words(s, c);
-	aux = ft_calloc((nwords + 1), sizeof(char *));
-	if (!aux)
-		return (NULL);
-	aux = ft_fill_array(aux, s, c);
-	return (aux);
+	if (s == 0)
+		return (0);
+	n = count_words(s, c);
+	str = ((char **)malloc(sizeof(char *) * (n + 1)));
+	if (str == 0)
+		return (0);
+	str[n] = 0;
+	if (n == 0)
+		return (str);
+	save_words(s, c, str);
+	return (str);
 }
