@@ -28,7 +28,7 @@ static int	ft_words(char const *s, char c)
 	return (words);
 }
 
-static int	strchr_pos(char const *s, char c)
+static int	ft_strchr_pos(char const *s, char c)
 {
 	char	*ptr;
 	int		pos_c;
@@ -67,7 +67,7 @@ static char	**ft_fillarray(char const *s, char c, char **aux)
 			s++;
 		else if (*s != c)
 		{
-			pos_c = strchr_pos(s, c);
+			pos_c = ft_strchr_pos(s, c);
 			if (pos_c)
 			{	
 				aux[i] = ft_substr(s, 0, pos_c);
