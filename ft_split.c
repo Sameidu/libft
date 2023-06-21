@@ -12,98 +12,87 @@
 
 #include "libft.h"
 
-int	count_words(const char	*str, char c)
+static int	count_words(char const *s, char c)
 {
-	size_t	countw;
-	size_t	i;
+	int	i;
+	int	words;
 
-	countw = 0;
 	i = 0;
-	while (str[i] != 0)
+	words = 0;
+	while (s[i] != '\0')
 	{
-		if (str[i] != c && str[i] != 0)
-		{
-			countw++;
-			while (str[i] != c && str[i] != 0)
-				i++;
-		}
-		else if (str[i] != 0)
-			i++;
+		if ((s[i] != c) && (s[i + 1] == c || s[i + 1] == '\0'))
+			words++;
+		i++;
 	}
-	return (countw);
+	return (words);
 }
 
-void	ft_strcpy(char *dst, const char *src, int start, int last)
+static int	strchr_pos(char const *s, char c)
+{
+	char	*ptr;
+	int		pos_c;
+
+	ptr = ft_strchr(s, (int)c);
+	if (ptr == 0)
+		pos_c = ft_strlen(s);
+	else
+		pos_c = ptr - s;
+	return (pos_c);
+}
+
+static void	*free_mallocs(char **main_string)
 {
 	int	i;
 
 	i = 0;
-	while (start < last)
+	while (main_string[i] != (void *)0)
 	{
-		dst[i] = src[start];
-		i++;
-		start++;
-	}
-	dst[i] = 0;
-}
-
-void	*freemmory(char **memry, size_t aux)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < aux)
-	{
-		free(memry[i]);
+		free(main_string[i]);
 		i++;
 	}
-	free(memry);
+	free(main_string);
 	return (NULL);
 }
 
-void	save_words(const char *s, char c, char **str)
+static char	**complete_array(char const *s, char c, char **main_string)
 {
-	size_t	i;
-	size_t	j;
-	size_t	start;
+	int	pos_c;
+	int	i;
 
 	i = 0;
-	j = 0;
-	while (s[i] != 0)
+	while (*s != '\0')
 	{
-		if (s[i] != c && s[i] != 0)
+		if ((*s == c) && (*s))
+			s++;
+		else if (*s != c)
 		{
-			start = i;
-			while (s[i] != c && s[i] != 0)
+			pos_c = strchr_pos(s, c);
+			if (pos_c)
+			{	
+				main_string[i] = ft_substr(s, 0, pos_c);
+				if (!main_string[i])
+					return (free_mallocs(main_string));
 				i++;
-			str[j] = (char *)malloc(sizeof(char) * (i - start + 1));
-			if (str[j] == 0)
-			{
-				freemmory(str, j);
-				return ;
+				s += pos_c;
 			}
-			ft_strcpy(str[j], s, start, i);
-			j++;
+			else
+				s++;
 		}
-		else if (s[i] != 0)
-			i++;
 	}
+	main_string[i] = NULL;
+	return (main_string);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**str;
-	size_t	n;
+	char	**main_string;
 
-	if (s == 0)
-		return (0);
-	n = count_words(s, c);
-	str = ((char **)malloc(sizeof(char *) * (n + 1)));
-	if (str == 0)
-		return (0);
-	str[n] = 0;
-	if (n == 0)
-		return (str);
-	save_words(s, c, str);
-	return (str);
+	if (s == NULL)
+		return (NULL);
+	main_string = (char **)malloc((count_words(s, c) + 1) * sizeof(char *));
+	if (!main_string)
+		return (NULL);
+	main_string = complete_array(s, c, main_string);
+	return (main_string);
 }
