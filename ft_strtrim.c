@@ -32,14 +32,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 	len = j - i;
 	return (ft_substr(s1, i, len + 1));
 }
-/*
-int	main(void)
-{
-	char	*p;
-	char	*s;
-
-	p = "abcdba";
-	s = "acb";
-	printf("%s\n",ft_strtrim(p, s));
-	return(0);
-}*/
