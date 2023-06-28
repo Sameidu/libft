@@ -6,15 +6,12 @@
 /*   By: smeixoei <smeixoei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:23:37 by smeixoei          #+#    #+#             */
-/*   Updated: 2023/06/19 14:47:25 by smeixoei         ###   ########.fr       */
+/*   Updated: 2023/06/28 18:37:29 by smeixoei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# include <ctype.h>
-# include <stdint.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 
