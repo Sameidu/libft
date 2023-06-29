@@ -65,7 +65,7 @@ OBJS_MAIN = $(SRCS_MAIN:.c=.o)
 
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
-RM = /bin/rm -f
+RM = rm -f
 
 all: $(NAME)
 
